@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SiteSelector } from "./components/SiteSelector";
-import { ContestsTable } from "./components/ContestsTable";
+import { ContestLister } from "./components/ContestLister";
 
 function App() {
   const [site, setSite] = useState("all");
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <SiteSelector site={site} setSite={setSite} />
-      <ContestsTable site={site} />
+      <ContestLister site={site} />
     </>
   );
 }
