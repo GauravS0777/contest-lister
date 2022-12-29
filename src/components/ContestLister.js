@@ -9,10 +9,19 @@ export const ContestLister = ({ site }) => {
   const [loading, setLoading] = useState(false);
   const [contestsList, setContestsList] = useState([]);
 
+  const makeTwoDigit = (d) => {
+    if (d < 10) {
+      return `0${d}`;
+    }
+
+    return d;
+  };
+
   const fetchContestsList = async () => {
     setLoading(true);
     const res = await axios.get(`https://kontests.net/api/v1/${site}`);
     let data = res.data;
+    data.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
     data = data.map((value) => {
       let d = parseInt(value.duration) / 3600;
       if (d >= 24) {
@@ -33,10 +42,33 @@ export const ContestLister = ({ site }) => {
           .join("");
       }
 
-      value = { ...value, duration: d, site: s };
+      let t = new Date(value.start_time);
+      const start_date = `${makeTwoDigit(t.getDate())}-${makeTwoDigit(
+        t.getMonth() + 1
+      )}-${t.getFullYear()}`;
+      const start_time = `${makeTwoDigit(t.getHours())}:${makeTwoDigit(
+        t.getMinutes()
+      )}`;
+
+      t = new Date(value.end_time);
+      const end_date = `${makeTwoDigit(t.getDate())}-${makeTwoDigit(
+        t.getMonth() + 1
+      )}-${t.getFullYear()}`;
+      const end_time = `${makeTwoDigit(t.getHours())}:${makeTwoDigit(
+        t.getMinutes()
+      )}`;
+
+      value = {
+        ...value,
+        duration: d,
+        site: s,
+        start_date: start_date,
+        start_time: start_time,
+        end_date: end_date,
+        end_time: end_time,
+      };
       return value;
     });
-    data.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
     setContestsList(data);
     setLoading(false);
   };

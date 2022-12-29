@@ -34,18 +34,10 @@ export const ContestTable = ({ children: contestsList, site }) => {
                 </Link>
               </TableCell>
               <TableCell align="right">{value.site}</TableCell>
-              <TableCell align="right">
-                {value.start_time.substring(0, 10)}
-              </TableCell>
-              <TableCell align="right">
-                {value.end_time.substring(0, 10)}
-              </TableCell>
-              <TableCell align="right">
-                {value.start_time.substring(11, 16)}
-              </TableCell>
-              <TableCell align="right">
-                {value.end_time.substring(11, 16)}
-              </TableCell>
+              <TableCell align="right">{value.start_date}</TableCell>
+              <TableCell align="right">{value.end_date}</TableCell>
+              <TableCell align="right">{value.start_time}</TableCell>
+              <TableCell align="right">{value.end_time}</TableCell>
               <TableCell align="right">{value.duration}</TableCell>
             </TableRow>
           ))}

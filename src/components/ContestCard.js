@@ -16,9 +16,21 @@ export const ContestCard = ({ details }) => {
           {details.name}
         </Typography>
       </Link>
-      <Typography align="center">
-        {details.start_time.substring(0, 10)}
-      </Typography>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            marginRight: "10px",
+          }}
+        >
+          {details.start_date}
+        </Typography>
+        <Typography> {details.start_time}</Typography>
+      </div>
       <Typography align="center">{details.duration}</Typography>
     </Container>
   );
